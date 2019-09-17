@@ -1,6 +1,7 @@
 # PredictionVis
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8
+本项目是时间序列预测模型的可视分析系统
 
 ## Development server
 
