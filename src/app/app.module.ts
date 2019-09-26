@@ -5,7 +5,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from './material-module';
-
 import { AppComponent } from './app.component';
 import { TimeSeriesComponent } from './time-series/time-series.component';
 import { DataSelectionComponent } from './data-selection/data-selection.component';
@@ -14,7 +13,7 @@ import { DataSelectionComponent } from './data-selection/data-selection.componen
   declarations: [
     AppComponent,
     TimeSeriesComponent,
-    DataSelectionComponent
+    DataSelectionComponent,
   ],
   imports: [
     BrowserModule,

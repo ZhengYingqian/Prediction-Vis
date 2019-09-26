@@ -1,17 +1,22 @@
-<mat-drawer-container>
-    <mat-drawer mode="side" opened>
-        <p>维度选择</p>
-        <app-data-selection></app-data-selection>
-    </mat-drawer>
-    <mat-drawer-content>
-        <div>主视图：时间序列
+<div class='container-fluid'>
+    <div class='row'>
+        <div class='col-3'>
+            <div class="card rounded mx-auto">
+                <div class="card-body">
+                    <h3 class="text-primary">维度选择</h3>
+                    <app-data-selection></app-data-selection>
+                </div>
+            </div>
+        </div>
+        <div class='col-9'>
+            <p>主视图：时间序列</p>
             <app-time-series></app-time-series>
+            <div>
+                <p>预测算法视图：</p>
+                <p>特征生成</p>
+                <p>特征选择</p>
+                <p>预测结果评估</p>
+            </div>
         </div>
-        <div>
-            <p>预测算法视图：</p>
-            <p>特征生成</p>
-            <p>特征选择</p>
-            <p>预测结果评估</p>
-        </div>
-    </mat-drawer-content>
-</mat-drawer-container>
+    </div>
+</div>
