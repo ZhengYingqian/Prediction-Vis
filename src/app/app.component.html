@@ -1,22 +1,21 @@
 <div class='container-fluid'>
     <div class='row'>
-        <div class='col-3'>
-            <div class="card rounded mx-auto">
-                <div class="card-body">
-                    <h3 class="text-primary">维度选择</h3>
-                    <app-data-selection></app-data-selection>
-                </div>
-            </div>
-        </div>
-        <div class='col-9'>
-            <p>主视图：时间序列</p>
-            <app-time-series></app-time-series>
+        <div class='col-4'>
+            <p>群组分析</p>
             <div>
-                <p>预测算法视图：</p>
-                <p>特征生成</p>
-                <p>特征选择</p>
-                <p>预测结果评估</p>
+                <app-sunburst></app-sunburst>
             </div>
         </div>
+        <div class='col-8'>
+            <p>时间序列</p>
+            <app-time-series></app-time-series>
+        </div>
+    </div>
+    <p>预测算法分析视图：</p>
+    <div class="row">
+        <!-- <div class="col-11"> -->
+        <!-- <p>预测模型可视化</p> -->
+        <app-features></app-features>
+        <!-- </div> -->
     </div>
 </div>

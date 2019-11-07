@@ -1,0 +1,119 @@
+{
+    "name": "门诊",
+    "children": [{
+            "name": "急诊科",
+            "children": [{
+                    "name": "K45",
+                    "children": [{
+                        "name": "K45.002",
+                        "value": 1334
+                    }, {
+                        "name": "K45.903",
+                        "children": [{
+                                "name": "0-12",
+                                "value": 2334
+                            },
+                            {
+                                "name": "12-25",
+                                "value": 5731
+                            },
+                            {
+                                "name": "25-45",
+                                "value": 7840
+                            },
+                            {
+                                "name": "45-60",
+                                "value": 5914
+                            },
+                            {
+                                "name": "60-100",
+                                "value": 3416
+                            },
+                            {
+                                "name": ">100",
+                                "value": 3416
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "name": "R55",
+                    "children": [{
+                        "name": "R55.x01",
+                        "children": [{
+                            "name": "0-12",
+                            "value": 2334
+                        }]
+                    }]
+                }
+            ]
+        },
+        {
+            "name": "妇科",
+            "children": [{
+                    "name": "K52",
+                    "children": [{
+                        "name": "K52.905",
+                        "children": [{
+                                "name": "12-25",
+                                "children": [{
+                                        "name": "male",
+                                        "value": 1000
+                                    },
+                                    {
+                                        "name": "female",
+                                        "value": 2000
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "25-45",
+                                "value": 7840
+                            },
+                            {
+                                "name": "45-60",
+                                "value": 5914
+                            },
+                            {
+                                "name": "60-100",
+                                "value": 3416
+                            },
+                            {
+                                "name": ">100",
+                                "value": 20
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "name": "J06.002",
+                    "children": [{
+                            "name": "0-12",
+                            "value": 334
+                        },
+                        {
+                            "name": "12-25",
+                            "value": 731
+                        },
+                        {
+                            "name": "25-45",
+                            "value": 784
+                        },
+                        {
+                            "name": "45-60",
+                            "value": 594
+                        },
+                        {
+                            "name": "60-100",
+                            "value": 416
+                        },
+                        {
+                            "name": ">100",
+                            "value": 316
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

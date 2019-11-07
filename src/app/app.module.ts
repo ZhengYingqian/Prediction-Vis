@@ -8,12 +8,20 @@ import {DemoMaterialModule} from './material-module';
 import { AppComponent } from './app.component';
 import { TimeSeriesComponent } from './time-series/time-series.component';
 import { DataSelectionComponent } from './data-selection/data-selection.component';
+import { SunburstComponent } from './sunburst/sunburst.component';
+import { FeaturesComponent } from './features/features.component';
+
+import {HttpService} from './core/http.service';
+import { DataService } from './core/data.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     TimeSeriesComponent,
     DataSelectionComponent,
+    SunburstComponent,
+    FeaturesComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +32,7 @@ import { DataSelectionComponent } from './data-selection/data-selection.componen
     MatNativeDateModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [HttpService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
