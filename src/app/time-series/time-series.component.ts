@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import {HttpService} from '../core/http.service';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { HttpService } from '../core/http.service';
 import { DataService } from '../core/data.service';
 import { MultiLine } from '../share/multiline.component';
 import { specInit } from '../share/spec';
@@ -12,7 +12,7 @@ import * as d3 from 'd3';
 })
 export class TimeSeriesComponent implements OnInit {
   ViewMultiline: MultiLine;
-  @ViewChild('viewMultiline', {static: false}) viewMultiline;
+  @ViewChild('viewMultiline', { static: false }) viewMultiline;
 
   data;
   lines;
@@ -23,24 +23,28 @@ export class TimeSeriesComponent implements OnInit {
   options;
   leftKeys;
   cols = ['ave_C', 'min_C', 'max_C', 'ave_ws', 'ave_rh', 'ave_hpa',
-  'daily_precipitation', 'SO2', 'NO2', 'CO', 'PM2_5', 'PM10', 'O38h', 'AQI', 'month', 'day', 'week' ];
+    'daily_precipitation', 'SO2', 'NO2', 'CO', 'PM2_5', 'PM10', 'O38h', 'AQI', 'month', 'day', 'week'];
+
+  test;
 
   constructor(
     private service: HttpService,
     private dataSer: DataService,
+    private ref: ChangeDetectorRef,
     private el: ElementRef) {
   }
   ngOnInit() {
-    this.dataSer.addDisease('K29.500');
-    console.log(this.dataSer.diseaseGroup);
-    d3.csv('assets/parts.csv').then(res => {
-      // console.log(res);
-      this.keys =  ['pediatric', 'gynecology', 'emergency'];
-      this.leftKeys = this.keys.concat(this.cols);
-      this.data = res;
-      this.lines = this.getLines(this.data);
-      // console.log(this.lines);
-      this.draw(this.lines, [0, 1000]);
+    this.dataSer.dataToactive.subscribe((res1) => {
+      this.data = res1;
+      console.log(this.data);
+      this.dataSer.diseaseToActive.subscribe(res => {
+        this.keys = res;
+        this.leftKeys = this.keys.concat(this.cols);
+        console.log(this.keys);
+        this.lines = this.getLines(this.data);
+        this.draw(this.lines, [0, 800]);
+        this.ref.detectChanges();
+      });
     });
   }
 
@@ -85,11 +89,11 @@ export class TimeSeriesComponent implements OnInit {
   getLines(res) {
     const lineGroupData = [];
     this.keys.forEach(v => {
-      const item  = {
-        name : v,
-        values : []
-    };
-    lineGroupData.push(item);
+      const item = {
+        name: v,
+        values: []
+      };
+      lineGroupData.push(item);
     });
     res.forEach(object => {
       for (const key in object) {
