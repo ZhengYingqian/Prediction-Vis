@@ -22,7 +22,9 @@ export class MultiLine {
 
   render() {
     console.log(this.data);
-
+    if (!!d3.select('.viewMultiline').select('svg')) {
+      this.clear();
+    }
     /* Scale */
     const xScale = d3.scaleTime()
        // @ts-ignore
@@ -205,7 +207,7 @@ export class MultiLine {
   }
 
   clear() {
-    d3.select('svg').remove();
+    d3.select('.viewMultiline').select('svg').remove();
   }
 }
 

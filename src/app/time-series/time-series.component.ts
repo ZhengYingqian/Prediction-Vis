@@ -12,7 +12,9 @@ import * as d3 from 'd3';
 })
 export class TimeSeriesComponent implements OnInit {
   ViewMultiline: MultiLine;
+  EnvLines: MultiLine;
   @ViewChild('viewMultiline', { static: false }) viewMultiline;
+  @ViewChild('envLines', { static: false }) envLines;
 
   data;
   lines;
@@ -23,9 +25,8 @@ export class TimeSeriesComponent implements OnInit {
   options;
   leftKeys;
   cols = ['ave_C', 'min_C', 'max_C', 'ave_ws', 'ave_rh', 'ave_hpa',
-    'daily_precipitation', 'SO2', 'NO2', 'CO', 'PM2_5', 'PM10', 'O38h', 'AQI', 'month', 'day', 'week'];
-
-  test;
+    'daily_precipitation', 'SO2', 'NO2', 'CO', 'PM2_5', 'PM10', 'O38h'];
+  others = ['AQI', 'month', 'day', 'week'];
 
   constructor(
     private service: HttpService,
@@ -41,54 +42,24 @@ export class TimeSeriesComponent implements OnInit {
         this.keys = res;
         this.leftKeys = this.keys.concat(this.cols);
         // console.log(this.keys);
-        this.lines = this.getLines(this.data);
+        this.lines = this.getLines(this.data, this.keys);
         this.draw(this.lines, [0, 800]);
         this.ref.detectChanges();
       });
     });
+    // this.getEnvLines();
   }
 
-  norm2data(type, res) {
-    if (type === 'norm') {
-      const new_res = {};
-      res.norm.map((v, i) => {
-        const temp = {};
-        res.keys.forEach((u, j) => {
-          temp[u] = v[j];
-        });
-        new_res[Date.parse('2013/1/1') + 60 * 60 * 24 * i] = temp;
-      });
-      return new_res;
-    } else {
-      return res;
-    }
-  }
-
-  // 根据options checkbox 获取keys
-  getLeftKeys() {
-    return this.options.filter(v => {
-      return v.checked;
-    }).map(v => {
-      return v.name;
+  getEnvLines() {
+    d3.csv('assets/res_environment_day.csv').then(res => {
+      this.draw1(this.getLines(res, this.cols), [0, 1]);
     });
   }
 
-  // 根据日期索引对象得到快速可视化数组
-  getJson(res) {
-    const keys = this.keys;
-    const data = [];
-    for (const item in res) {
-      if (res.hasOwnProperty(item)) {
-        data.push(Object.assign({ 'date': item }, res[item]));
-      }
-    }
-    return data;
-  }
-
   // 根据时间索引数据获取多维折线图输入
-  getLines(res) {
+  getLines(res, keys) {
     const lineGroupData = [];
-    this.keys.forEach(v => {
+    keys.forEach(v => {
       const item = {
         name: v,
         values: []
@@ -103,7 +74,7 @@ export class TimeSeriesComponent implements OnInit {
             if (u.name === key) {
               u.values.push({
                 date: Date.parse(object['date']),
-                value: parseInt(object[key], 10)
+                value: element
               });
             }
           });
@@ -119,10 +90,13 @@ export class TimeSeriesComponent implements OnInit {
     this.ViewMultiline = new MultiLine(this.viewMultiline.nativeElement, data, range);
     this.ViewMultiline.render();
   }
+  draw1(data, range) {
+    this.EnvLines = new MultiLine(this.envLines.nativeElement, data, range);
+    this.EnvLines.render();
+  }
 
   // 图刷新
   select(start: any, end: any, res?: any) {
-    this.leftKeys = this.getLeftKeys();
     const data = !!res ? res : this.data;
     const newData = {};
     for (const day in data) {
@@ -134,45 +108,10 @@ export class TimeSeriesComponent implements OnInit {
       }
     }
     // console.log(newData);
-    const newLines = this.getLines(newData);
+    const newLines = this.getLines(this.dataSer.selected_data, this.keys);
     this.ViewMultiline.clear();
-    this.draw(newLines, [0, 1000]);
-    this.el.nativeElement.querySelector('#embed-view').outerHTML = ' <div id="embed-view" style="text-align: center"></div>';
-  }
-
-  // 归一化结果
-  normData(start: any, end: any) {
-    const t = 'norm';
-    this.service.getData(t).subscribe(res => {
-      // console.log(res);
-      this.data = this.norm2data(t, res);
-      console.log(this.data);
-      this.keys = Object.keys(this.data['1356969600000']);
-      // this.options = this.keys.map((v, i) => {
-      //   return {
-      //     'checked': i < 6,
-      //     'value': v,
-      //     'name': v
-      //   };
-      // });
-      this.leftKeys = this.getLeftKeys();
-      console.log(this.leftKeys);
-      this.lines = this.getLines(this.data);
-      console.log(this.lines);
-      this.draw(this.lines, [0, 1]);
-    });
-  }
-
-  // 获取vega配置文件
-  spec(data) {
-    console.log(data);
-    const spec = specInit;
-    // @ts-ignore
-    spec.spec.data = { 'values': data };
-    spec.repeat.column = this.leftKeys;
-    spec.repeat.row = this.leftKeys;
-    console.log(spec);
-    return spec;
+    this.draw(newLines, [0, 800]);
+    // this.el.nativeElement.querySelector('#embed-view').outerHTML = ' <div id="embed-view" style="text-align: center"></div>';
   }
 
 }

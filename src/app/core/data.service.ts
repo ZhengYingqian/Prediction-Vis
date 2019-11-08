@@ -11,14 +11,14 @@ export class DataService {
     diseaseToActive = new EventEmitter<any>();
 
     constructor() {
-     this.loadData();
+        this.loadData();
     }
 
     loadData() {
-        d3.csv('assets/icds.csv').then( res => {
+        d3.csv('assets/icds.csv').then(res => {
             this.ori_data = res;
             this.ori_disease = res;
-            this.selected_disease = res.columns.slice(0, 6);
+            this.selected_disease = res.columns.slice(1, 6);
             this.selected_data = this.filterByName(this.selected_disease);
             this.dataToactive.emit(this.selected_data);
             this.diseaseToActive.emit(this.selected_disease);
@@ -27,18 +27,18 @@ export class DataService {
     }
 
     filterByName(names) {
-        return this.ori_data.map( object => {
-           const newItem = {date: object['date']};
-           for (const key in object) {
-               if (object.hasOwnProperty(key)) {
-                   const element = object[key];
-                   if (names.indexOf(key) !== -1 && (key !== 'date')) {
-                       newItem[key] = parseInt(element, 10);
-                   }
-               }
-           }
-           return newItem;
-       });
+        return this.ori_data.map(object => {
+            const newItem = { date: object['date'] };
+            for (const key in object) {
+                if (object.hasOwnProperty(key)) {
+                    const element = object[key];
+                    if (names.indexOf(key) !== -1 && (key !== 'date')) {
+                        newItem[key] = parseInt(element, 10);
+                    }
+                }
+            }
+            return newItem;
+        });
     }
 
     addDisease(name) {
@@ -47,5 +47,4 @@ export class DataService {
         this.dataToactive.emit(this.selected_data);
         console.log(this.selected_data);
     }
-
 }

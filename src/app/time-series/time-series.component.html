@@ -1,2 +1,9 @@
-<div #viewMultiline class="viewMultiline" style="width: 1000px; float: left; margin-right: 200px">
-</div>
+<!-- <div>
+    <p>filter:</p>
+    <input type="text" matInput [(ngModel)]="start">
+    <input type="text" matInput [(ngModel)]="end">
+    <input type="text" matInput [(ngModel)]="step">
+</div> -->
+<button (click)="select(start, end)" style="float: left; margin-left: 50px"> 重绘</button>
+<div #viewMultiline class="viewMultiline" style="width: 1000px; float: left"> </div>
+<div #envLines class="envLines" style="width: 1000px; float: left; margin-right: 200px"></div>

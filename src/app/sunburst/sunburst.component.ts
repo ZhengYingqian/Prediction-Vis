@@ -33,12 +33,12 @@ export class SunburstComponent implements OnInit {
             'value': element
           });
         } else {
-          const childrenKeys = Object.keys(object);
+          const childrenKeys = Object.keys(element);
           const children = childrenKeys.slice(0, 10).map((u, i) => {
             if (i < 10) {
               return {
                 'name': u,
-                'children': this.getleaf(object[u])
+                'value': element[u]
               };
             }
           });
@@ -76,8 +76,8 @@ export class SunburstComponent implements OnInit {
     this.service.loadJson('assets/mixallpart.json')
       .subscribe(res => {
         const data = this.getDATA(res, root);
-        // console.log(data);
-        // console.log(res);
+        console.log(data);
+        console.log(res);
         const sunburst = new Sunburst(this.dataSer);
         sunburst.chart(data);
       });
