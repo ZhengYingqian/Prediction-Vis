@@ -36,11 +36,11 @@ export class TimeSeriesComponent implements OnInit {
   ngOnInit() {
     this.dataSer.dataToactive.subscribe((res1) => {
       this.data = res1;
-      console.log(this.data);
+      // console.log(this.data);
       this.dataSer.diseaseToActive.subscribe(res => {
         this.keys = res;
         this.leftKeys = this.keys.concat(this.cols);
-        console.log(this.keys);
+        // console.log(this.keys);
         this.lines = this.getLines(this.data);
         this.draw(this.lines, [0, 800]);
         this.ref.detectChanges();

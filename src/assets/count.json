@@ -49,6 +49,54 @@
             ]
         },
         {
+            "name": "消化内科",
+            "children": [{
+                    "name": "K29",
+                    "children": [{
+                        "name": "K29.502",
+                        "value": 1334
+                    }, {
+                        "name": "K29.500",
+                        "children": [{
+                                "name": "0-12",
+                                "value": 2334
+                            },
+                            {
+                                "name": "12-25",
+                                "value": 5731
+                            },
+                            {
+                                "name": "25-45",
+                                "value": 7840
+                            },
+                            {
+                                "name": "45-60",
+                                "value": 5914
+                            },
+                            {
+                                "name": "60-100",
+                                "value": 3416
+                            },
+                            {
+                                "name": ">100",
+                                "value": 3416
+                            }
+                        ]
+                    }]
+                },
+                {
+                    "name": "K71",
+                    "children": [{
+                        "name": "K71.901",
+                        "children": [{
+                            "name": "0-12",
+                            "value": 2334
+                        }]
+                    }]
+                }
+            ]
+        },
+        {
             "name": "妇科",
             "children": [{
                     "name": "K52",

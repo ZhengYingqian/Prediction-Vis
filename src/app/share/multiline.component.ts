@@ -17,6 +17,7 @@ export class MultiLine {
     if (!!range) {
       this.range = range;
     }
+    // d3.select(this.target).selectAll('*').remove();
   }
 
   render() {
