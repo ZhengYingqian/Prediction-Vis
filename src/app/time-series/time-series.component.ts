@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef, ChangeDetectorRef } from '@an
 import { HttpService } from '../core/http.service';
 import { DataService } from '../core/data.service';
 import { MultiLine } from '../share/multiline.component';
-import { specInit } from '../share/spec';
 import * as d3 from 'd3';
 
 @Component({

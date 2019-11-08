@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpService } from '../core/http.service';
+import { DataService } from '../core/data.service';
 import * as d3 from 'd3';
 import vegaEmbed from 'vega-embed';
 import { specInit, specRepeat, specY } from './spec';
@@ -14,6 +15,7 @@ export class FeaturesComponent implements OnInit {
   columns;
   data;
   constructor(private service: HttpService,
+    private dataSer: DataService,
     private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
@@ -59,6 +61,7 @@ export class FeaturesComponent implements OnInit {
     return spec;
   }
 
+  // 绘制频谱分布图
   draw(data, columns) {
     columns.forEach((v, i) => {
       // @ts-ignore
@@ -80,6 +83,7 @@ export class FeaturesComponent implements OnInit {
     return spec;
   }
 
+  // 绘制多行多列相关性折线图
   draw1(data) {
     // @ts-ignore
     vegaEmbed('.corr', this.spec1(data), { actions: false });
