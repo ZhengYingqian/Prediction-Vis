@@ -4,6 +4,51 @@
     <input type="text" matInput [(ngModel)]="end">
     <input type="text" matInput [(ngModel)]="step">
 </div> -->
-<button (click)="select(start, end)" style="float: left; margin-left: 50px"> 重绘</button>
-<div #viewMultiline class="viewMultiline" style="width: 1000px; float: left"> </div>
-<div #envLines class="envLines" style="width: 1000px; float: left; margin-right: 200px"></div>
+<p>时间序列预测和分析</p>
+<div #viewMultiline class="viewMultiline" style="width: 500px; float: left;margin-left: -120px">
+    <button mat-button (click)="select(start, end)" style="float: left; margin-left: 50px"> 重绘</button>
+</div>
+<!-- <div #envLines class="envLines" style="width: 500px; float: left; margin-right: 200px"></div> -->
+
+<div style="width: 50%; float: right; margin-top: 20px">
+    <p>预测结果评价</p>
+    <!-- <mat-card> -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> 预测算法 </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+            <th mat-header-cell *matHeaderCellDef> RMSE </th>
+            <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+            <th mat-header-cell *matHeaderCellDef> MAE </th>
+            <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="R2">
+            <th mat-header-cell *matHeaderCellDef> R2 </th>
+            <td mat-cell *matCellDef="let element"> {{element.R2}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <!-- </mat-card> -->
+</div>

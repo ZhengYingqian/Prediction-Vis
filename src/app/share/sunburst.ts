@@ -33,7 +33,7 @@ export class Sunburst {
 
         root.each(d => d.current = d);
 
-        const svg = d3.select('#sunburst').append('svg').attr('width', 500).attr('height', 500)
+        const svg = d3.select('#sunburst').append('svg').attr('width', 400).attr('height', 400)
             .attr('viewBox', [0, 0, this.width, this.width])
             .style('font', '10px sans-serif');
 

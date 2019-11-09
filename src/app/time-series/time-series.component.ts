@@ -4,6 +4,22 @@ import { DataService } from '../core/data.service';
 import { MultiLine } from '../share/multiline.component';
 import * as d3 from 'd3';
 
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+  R2: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: 1, name: 'Linear regression', weight: 1.0079, symbol: 'H', R2: '1'},
+  {position: 2, name: 'SVM', weight: 4.0026, symbol: 'He', R2: '0.7'},
+  {position: 3, name: 'KNN', weight: 6.941, symbol: 'Li', R2: '0.5'},
+  {position: 4, name: 'RF', weight: 6.941, symbol: 'Li', R2: '0.5'},
+  {position: 5, name: 'XGboost', weight: 6.941, symbol: 'Li', R2: '0.5'}
+];
+
 @Component({
   selector: 'app-time-series',
   templateUrl: './time-series.component.html',
@@ -27,6 +43,9 @@ export class TimeSeriesComponent implements OnInit {
     'daily_precipitation', 'SO2', 'NO2', 'CO', 'PM2_5', 'PM10', 'O38h'];
   others = ['AQI', 'month', 'day', 'week'];
 
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'R2'];
+  dataSource = ELEMENT_DATA;
+
   constructor(
     private service: HttpService,
     private dataSer: DataService,
@@ -42,7 +61,7 @@ export class TimeSeriesComponent implements OnInit {
         this.leftKeys = this.keys.concat(this.cols);
         // console.log(this.keys);
         this.lines = this.getLines(this.data, this.keys);
-        this.draw(this.lines, [0, 800]);
+        this.draw(this.lines, [0, 500]);
         this.ref.detectChanges();
       });
     });

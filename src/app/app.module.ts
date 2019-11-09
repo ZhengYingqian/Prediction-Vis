@@ -10,9 +10,11 @@ import { TimeSeriesComponent } from './time-series/time-series.component';
 import { DataSelectionComponent } from './data-selection/data-selection.component';
 import { SunburstComponent } from './sunburst/sunburst.component';
 import { FeaturesComponent } from './features/features.component';
+import { RadarComponent } from './radar/radar.component';
 
 import {HttpService} from './core/http.service';
 import { DataService } from './core/data.service';
+import { OverviewComponent } from './overview/overview.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { DataService } from './core/data.service';
     TimeSeriesComponent,
     DataSelectionComponent,
     SunburstComponent,
-    FeaturesComponent
+    FeaturesComponent,
+    RadarComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

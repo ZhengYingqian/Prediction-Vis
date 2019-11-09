@@ -18,7 +18,8 @@ export class DataService {
         d3.csv('assets/icds.csv').then(res => {
             this.ori_data = res;
             this.ori_disease = res;
-            this.selected_disease = res.columns.slice(1, 6);
+            // this.selected_disease = res.columns.slice(1, 6);
+            this.selected_disease = ['K29.500'];
             this.selected_data = this.filterByName(this.selected_disease);
             this.dataToactive.emit(this.selected_data);
             this.diseaseToActive.emit(this.selected_disease);
@@ -33,6 +34,21 @@ export class DataService {
                 if (object.hasOwnProperty(key)) {
                     const element = object[key];
                     if (names.indexOf(key) !== -1 && (key !== 'date')) {
+                        newItem[key] = parseInt(element, 10);
+                    }
+                }
+            }
+            return newItem;
+        });
+    }
+
+    getByName(name) {
+        return this.ori_data.map(object => {
+            const newItem = { date: object['date'] };
+            for (const key in object) {
+                if (object.hasOwnProperty(key)) {
+                    const element = object[key];
+                    if (name === key) {
                         newItem[key] = parseInt(element, 10);
                     }
                 }

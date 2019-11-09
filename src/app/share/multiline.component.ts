@@ -4,12 +4,12 @@ export class MultiLine {
   target: HTMLElement;
   data;
   year;
-  width = 1200;
-  height = 600;
-  margin = 80;
+  width = 600;
+  height = 300;
+  margin = 30;
   textW = 200;
   duration = 250;
-  range = [0, 1000];
+  range = [0, 500];
 
   constructor(target: HTMLElement, data, range?) {
     this.target = target;
@@ -110,7 +110,7 @@ export class MultiLine {
         return d.name;
       })
       .attr('text-anchor', 'middle')
-      .attr('x', this.width - this.textW / 2)
+      .attr('x', this.width - this.textW / 2 - 60)
       .attr('y', function (d, i) {
         // console.log(d, i);
         return 5 + 20 * i;
