@@ -8,7 +8,9 @@
 // For a bit of extra information check the blog about it:
 // http://nbremer.blogspot.nl/2013/09/making-d3-radar-chart-look-bit-better.html
 import * as d3 from 'd3';
+import { DataService } from '../core/data.service';
 export class RadarChart {
+    constructor(private dataSer: DataService) {}
     draw = (id: any, d: { map: (arg0: (i: any, j: any) => any) => void; }[], options: { [x: string]: any; }) => {
         const cfg = {
             radius: 5,
@@ -19,7 +21,7 @@ export class RadarChart {
             levels: 3,
             maxValue: 0,
             radians: 2 * Math.PI,
-            opacityArea: 0.5,
+            opacityArea: 0.3,
             ToRight: 5,
             TranslateX: 80,
             TranslateY: 30,
@@ -42,7 +44,7 @@ export class RadarChart {
         const total = allAxis.length;
         console.log(total, allAxis);
         const radius = cfg.factor * Math.min(cfg.w / 2, cfg.h / 2);
-        const Format = d3.format('%');
+        const Format = d3.format('.1%');
         d3.select(id).select('svg').remove();
 
         const g = d3.select(id)
@@ -131,7 +133,11 @@ export class RadarChart {
                 return cfg.w / 2 * (1 - cfg.factorLegend * Math.sin(i * cfg.radians / total)) - 60 * Math.sin(i * cfg.radians / total); })
             // tslint:disable-next-line:no-shadowed-variable
             .attr('y', function (d: any, i: number) {
-                return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total); });
+                return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total); })
+                .on('click', (d) => {
+                    console.log(d);
+                    this.dataSer.addEnv(d);
+                });
 
                 const dataValues = [];
         d.forEach(function (y: any, x: any) {
@@ -148,7 +154,7 @@ export class RadarChart {
                 .enter()
                 .append('polygon')
                 .attr('class', 'radar-chart-serie' + series)
-                .style('stroke-width', '2px')
+                .style('stroke-width', '1px')
                 .style('stroke', cfg.color(series))
                 // tslint:disable-next-line:no-shadowed-variable
                 .attr('points', function (d: string[][]) {
@@ -184,7 +190,7 @@ export class RadarChart {
                 .data(y).enter()
                 .append('svg:circle')
                 .attr('class', 'radar-chart-serie' + series)
-                .attr('r', cfg.radius)
+                .attr('r', cfg.radius/2)
                 .attr('alt', function (j: { value: number; }) { return Math.max(j.value, 0); })
                 .attr('cx', function (j: { value: number; }, i: number) {
                     dataValues.push([

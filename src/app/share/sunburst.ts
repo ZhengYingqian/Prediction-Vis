@@ -59,6 +59,7 @@ export class Sunburst {
             });
 
         path.append('title')
+            // tslint:disable-next-line:no-shadowed-variable
             .text(d => `${d.ancestors().map(d => d.data.name).reverse().join('/')}\n${this.format(d.value)}`);
 
         const label = g.append('g')
@@ -98,6 +99,7 @@ export class Sunburst {
             path.transition(t)
                 .tween('data', d => {
                     const i = d3.interpolate(d.current, d.target);
+                    // tslint:disable-next-line:no-shadowed-variable
                     return t => d.current = i(t);
                 })
                 .filter(function (d) {

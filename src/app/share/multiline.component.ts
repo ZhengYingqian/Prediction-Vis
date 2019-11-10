@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
 // @ts-ignore
 export class MultiLine {
-  target: HTMLElement;
   data;
   year;
   width = 600;
@@ -10,19 +9,19 @@ export class MultiLine {
   textW = 200;
   duration = 250;
   range = [0, 500];
+  className;
 
-  constructor(target: HTMLElement, data, range?) {
-    this.target = target;
+  constructor(data, name, range?) {
     this.data = data;
+    this.className = name;
     if (!!range) {
       this.range = range;
     }
-    // d3.select(this.target).selectAll('*').remove();
   }
 
   render() {
     console.log(this.data);
-    if (!!d3.select('.viewMultiline').select('svg')) {
+    if (!!d3.select(this.className).select('svg')) {
       this.clear();
     }
     /* Scale */
@@ -37,9 +36,21 @@ export class MultiLine {
       .range([this.height - this.margin, 0]);
 
     const color = d3.scaleOrdinal(d3.schemeCategory10);
+    // const zoom = d3
+    // .zoom()
+    // .scaleExtent([1, Infinity])
+    // .translateExtent([[0, 0], [this.width, this.height]])
+    // .extent([[0, 0], [this.width, this.height]])
+    // .on('zoom', zoomed);
+
+    // const brush = d3
+    // .brushX()
+    // .extent([[0, 0], [this.width, this.height]])
+    // .on('brush end', brushed);
+
 
     /* Add SVG */
-    const svg = d3.select(this.target).append('svg')
+    const svg = d3.select(this.className).append('svg')
       .attr('width', (this.width + this.textW) + 'px')
       .attr('height', (this.height + this.margin) + 'px')
       .append('g')
@@ -110,7 +121,8 @@ export class MultiLine {
         return d.name;
       })
       .attr('text-anchor', 'middle')
-      .attr('x', this.width - this.textW / 2 - 60)
+      // .attr('x', this.width - this.textW / 2 - 60)
+      .attr('x', 100)
       .attr('y', function (d, i) {
         // console.log(d, i);
         return 5 + 20 * i;
@@ -207,7 +219,7 @@ export class MultiLine {
   }
 
   clear() {
-    d3.select('.viewMultiline').select('svg').remove();
+    d3.select(this.className).select('svg').remove();
   }
 }
 

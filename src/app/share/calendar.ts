@@ -1,8 +1,8 @@
 import * as d3 from 'd3';
 
 export class Calendar {
-    cellSize = 17;
-    width = 954;
+    cellSize = 8;
+    width = 500;
     weekday;
 
     constructor(weekday) {
@@ -18,7 +18,7 @@ export class Calendar {
         const countDay = this.weekday === 'sunday' ? d => new Date(d).getUTCDay() : d => (new Date(d).getUTCDay() + 6) % 7;
         const height = this.cellSize * (this.weekday === 'weekday' ? 7 : 9);
         const max = d3.quantile(data.map(d => Math.abs(d.value)).sort(d3.ascending), 0.995);
-        const color =  d3.scaleSequential(d3.interpolatePiYG).domain([-max, +max]);
+        const color =  d3.scaleSequential(d3.interpolateBuGn).domain([0, +max + 1000]);
         // const legend({color, title: "Daily change", tickFormat: "+%"})
 
         const pathMonth = (t) => {
@@ -31,12 +31,14 @@ export class Calendar {
         };
 
         const years = d3.nest()
-            .key(d => new Date(d.date).getUTCFullYear())
+            .key(d => d.date.getUTCFullYear())
             .entries(data)
             .reverse();
 
         const svg = d3.select('.calendar').append('svg')
-            .attr('viewBox', [0, 0, this.width, height * years.length])
+            // .attr('viewBox', [0, 0, this.width, height * years.length])
+            .attr('viewBox', [0, 0, this.width, height])
+            .attr('width', this.width + 400)
             .attr('font-family', 'sans-serif')
             .attr('font-size', 10);
 
@@ -74,7 +76,7 @@ export class Calendar {
             .attr('y', d => countDay(d.date) * this.cellSize + 0.5)
             .attr('fill', (d) => color(d.value))
             .append('title')
-            .text(d => `${formatDate(d.date)}: ${format(d.value)}`);
+            .text(d => `${formatDate(d.date)}: ${(d.value)}`);
 
         const month = year.append('g')
             .selectAll('g')
@@ -88,7 +90,9 @@ export class Calendar {
             .attr('d', pathMonth);
 
         month.append('text')
-            .attr('x', d => timeWeek.count(d3.utcYear(d.date), timeWeek.ceil(d)) * this.cellSize + 2)
+            .attr('x', d => {
+                return timeWeek.count(d3.utcYear(d), timeWeek.ceil(d)) * this.cellSize + 2;
+            })
             .attr('y', -5)
             .text(formatMonth);
 

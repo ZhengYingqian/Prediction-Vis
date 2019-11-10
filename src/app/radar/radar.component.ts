@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as d3 from 'd3';
 import { RadarChart } from '../share/radarchart';
 import { corr1, corr2, cols, Dic } from '../share/correlation';
@@ -11,14 +11,20 @@ import { HttpService } from '../core/http.service';
   styleUrls: ['./radar.component.css']
 })
 export class RadarComponent implements OnInit {
+  @Input() id: number;
+  @Input() disease: any;
+  radar;
+
   corr = [corr1, corr2];
   pearson = this.corr.map(v => v.map(u => u[0]));
-  radar = new RadarChart();
+  pValue = this.corr.map(v => v.map(u => u[1]));
+
   constructor(private datsSer: DataService,
     private httpSer: HttpService) { }
 
   ngOnInit() {
-    this.drawRader();
+    this.radar = new RadarChart(this.datsSer);
+    // this.drawRader();
   }
 
   drawRader() {
@@ -28,11 +34,13 @@ export class RadarComponent implements OnInit {
     const colorscale = d3.scaleOrdinal(d3.schemeCategory10);
 
     // Legend titles
-    const LegendOptions = ['dis1'];
+    // const LegendOptions = ['pearson', 'MIC', 'f_regression', 'spearman'];
+    const LegendOptions = ['pearson', 'MIC'];
 
-    const data = this.corr.map(v => {
-      return v.map((u, i) => ({ 'axis': Dic[cols[i]], 'value': Math.abs(parseFloat(u[0].toFixed(2)))}));
-    });
+    // const data = this.corr.map(v => {
+    //   return v.map((u, i) => ({ 'axis': Dic[cols[i]], 'value': Math.abs(parseFloat(u[0].toFixed(2)))}));
+    // });
+    const data = this.datsSer.loadAllcorr(this.disease);
     console.log(data);
     // Options for the Radar chart, other than default
     const mycfg = {
@@ -45,34 +53,34 @@ export class RadarComponent implements OnInit {
 
     // Call function to draw the Radar chart
     // Will expect that data is in %'s
-    this.radar.draw('#chart', data, mycfg);
+    this.radar.draw('.chart' + this.id, data, mycfg);
 
     ////////////////////////////////////////////
     /////////// Initiate legend ////////////////
     ////////////////////////////////////////////
 
-    const svg = d3.select('#draw')
+    const svg = d3.select('.chart' + this.id)
       .selectAll('svg')
       .append('svg')
       .attr('width', w + 300)
-      .attr('height', h)
+      .attr('height', h);
 
     // Create the title for the legend
     const text = svg.append('text')
       .attr('class', 'title')
-      .attr('transform', 'translate(90,0)')
+      .attr('transform', 'translate(40,0)')
       .attr('x', w - 70)
       .attr('y', 10)
       .attr('font-size', '12px')
       .attr('fill', '#404040')
       .text('correlation');
 
-    // Initiate Legend	
+    // Initiate Legend
     const legend = svg.append('g')
       .attr('class', 'legend')
       .attr('height', 100)
       .attr('width', 200)
-      .attr('transform', 'translate(90,20)');
+      .attr('transform', 'translate(160,20)');
     // Create colour squares
     legend.selectAll('rect')
       .data(LegendOptions)
