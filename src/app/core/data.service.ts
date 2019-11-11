@@ -63,17 +63,19 @@ export class DataService {
         const corr = [];
         if (type === 'mic') {
             this.ori_corr_mic.forEach(u => {
+                const s = u[name];
                 const temp = {
                     axis: u['dim'],
-                    value: Math.abs(parseFloat(u[name].toFixed(2)))
+                    value: Math.abs(parseFloat(s.substring(0, s.indexOf('.') + 3))
                 };
                 corr.push(temp);
             });
         } else if (type === 'pearson') {
             this.ori_corr_pearson.forEach(u => {
+                const s = u[name];
                 const temp = {
                     axis: u['dim'],
-                    value: Math.abs(parseFloat(u[name].toFixed(2)))
+                    value: Math.abs(parseFloat(s.substring(0, s.indexOf('.') + 3))
                 };
                 corr.push(temp);
             });
