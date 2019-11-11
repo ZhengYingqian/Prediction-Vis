@@ -190,7 +190,7 @@ export class RadarChart {
                 .data(y).enter()
                 .append('svg:circle')
                 .attr('class', 'radar-chart-serie' + series)
-                .attr('r', cfg.radius/2)
+                .attr('r', cfg.radius / 2)
                 .attr('alt', function (j: { value: number; }) { return Math.max(j.value, 0); })
                 .attr('cx', function (j: { value: number; }, i: number) {
                     dataValues.push([

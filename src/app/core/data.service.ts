@@ -65,7 +65,7 @@ export class DataService {
             this.ori_corr_mic.forEach(u => {
                 const temp = {
                     axis: u['dim'],
-                    value: Math.abs(parseFloat(u[name]).toFixed(2))
+                    value: Math.abs(parseFloat(u[name].toFixed(2)))
                 };
                 corr.push(temp);
             });
@@ -73,7 +73,7 @@ export class DataService {
             this.ori_corr_pearson.forEach(u => {
                 const temp = {
                     axis: u['dim'],
-                    value: Math.abs(parseFloat(u[name]).toFixed(2))
+                    value: Math.abs(parseFloat(u[name].toFixed(2)))
                 };
                 corr.push(temp);
             });

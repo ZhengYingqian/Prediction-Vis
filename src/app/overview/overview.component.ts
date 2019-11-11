@@ -22,9 +22,10 @@ export class OverviewComponent implements OnInit {
   }
 
   transform(data) {
-    let spec = specOverview;
+    let spec = {};
+    spec = specOverview;
     spec.data.values = data.map((u, i) => {
-      u['age'] = parseInt(u['age']);
+      u['age'] = parseInt(u['age'], 10);
       return u;
     });
     // spec.
