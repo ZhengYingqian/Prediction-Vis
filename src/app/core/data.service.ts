@@ -31,7 +31,6 @@ export class DataService {
         d3.csv('assets/icd_2014.csv').then(res => {
             this.ori_data = res;
             this.ori_disease = res;
-            
             // this.selected_disease = res.columns.slice(1, 6);
             this.selected_data = this.filterByName(this.selected_disease);
             this.dataToactive.emit(this.selected_data);
@@ -66,7 +65,7 @@ export class DataService {
                 const s = u[name];
                 const temp = {
                     axis: u['dim'],
-                    value: Math.abs(parseFloat(s.substring(0, s.indexOf('.') + 3))
+                    value: Math.abs(parseFloat(s.substring(0, s.indexOf('.') + 3)))
                 };
                 corr.push(temp);
             });
@@ -75,7 +74,7 @@ export class DataService {
                 const s = u[name];
                 const temp = {
                     axis: u['dim'],
-                    value: Math.abs(parseFloat(s.substring(0, s.indexOf('.') + 3))
+                    value: Math.abs(parseFloat(s.substring(0, s.indexOf('.') + 3)))
                 };
                 corr.push(temp);
             });
