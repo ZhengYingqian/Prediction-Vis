@@ -32,11 +32,6 @@ export class HttpService {
     partArr = ['儿科门诊', '妇科门诊', '耳鼻喉科门诊'];
     const params = JSON.stringify({ 'part': partArr });
     return this.http.post(this.url + '/data', params, {headers: {'Content-Type': 'application/json'}});
-    // .do( () => {})
-    // .catch(res => {
-    //     console.log(res);
-    //     return res
-    //   })
   }
 
   getPrediction(params): Observable<any> {

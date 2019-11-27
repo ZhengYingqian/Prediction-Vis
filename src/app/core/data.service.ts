@@ -224,7 +224,7 @@ export class DataService {
     }
 
     getPredicArr(i) {
-        const allEnv = this.getRangeEnv(this.cols, Date.parse(this.start_day), Date.parse(this.end_day));
+        const allEnv = this.getRangeEnv(this.cols, Date.parse(this.start_day), Date.parse('2015-1-1'));
         const num = this.predict_group[this.selected_disease[i]]['num'].map(u => u.value);
         return { x: allEnv, y: num, param: {'col': this.cols} };
     }
