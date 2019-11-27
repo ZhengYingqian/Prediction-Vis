@@ -7,7 +7,11 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 })
 export class HttpService {
 
-  url = 'http://127.0.0.1:5000';
+  // url = 'http://127.0.0.1:5000';
+  url = 'http://202.117.54.60:5000';
+  // 数据库后端
+  url1 = 'http://202.117.54.93:8800';
+
   datas = {
     'clinical': '/cdata', // 门诊数据
     'air': '/adata', // 获取空气质量数据
@@ -34,6 +38,10 @@ export class HttpService {
     //     return res
     //   })
   }
+
+  getPrediction(params): Observable<any> {
+    return this.http.post(this.url + '/predict', JSON.stringify(params), {headers: {'Content-Type': 'application/json'}});
+  }
   // 获取特征
 
   // 获取相似度
@@ -43,5 +51,18 @@ export class HttpService {
   // 读取json数据
   loadJson(file): Observable<any> {
     return this.http.get(file);
+  }
+
+  // 获取时间范围内疾病的数据
+  // params: {"dim": ["J03.903"], "start":"2013-1-1", "stop":"2013-1-2", "normalization": false}
+  // return: { 'Result': {
+  //   '2013-01-01'：{'J03.903': 44}
+  // }}
+  getDisease(params): Observable<any> {
+    return this.http.post(this.url1 + '/weather/disease_count', JSON.stringify(params));
+  }
+
+  getRecords(params): Observable<any> {
+    return this.http.post(this.url1 + '/weather/disease_op', JSON.stringify(params));
   }
 }

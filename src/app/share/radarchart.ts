@@ -136,7 +136,7 @@ export class RadarChart {
                 return cfg.h / 2 * (1 - Math.cos(i * cfg.radians / total)) - 20 * Math.cos(i * cfg.radians / total); })
                 .on('click', (d) => {
                     console.log(d);
-                    this.dataSer.addEnv(d);
+                    this.dataSer.addEnv(d, id);
                 });
 
                 const dataValues = [];

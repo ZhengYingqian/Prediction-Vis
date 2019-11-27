@@ -6,10 +6,14 @@
                 <app-overview></app-overview>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-8 list">
             <p>时间序列预测和分析<span style="float: right;margin-right: 100px">feature rank and prediction result</span></p>
-            <div *ngFor='let item of disease, index as i'>
-                <app-time-series [id]='i' [disease]='item'></app-time-series>
+            <span *ngFor='let item of disease' class="badge badge-primary" style="margin-right: 2px;" (click)='deleteDim(item)'>{{item}}</span>
+            <span *ngFor='let item of envCol' class="badge badge-Secondary" style="margin-right: 2px;" (click)='deleteCol(item)'>{{item}}</span>
+            <button type="button" class="btn btn-outline-info" style='width: 50px; font-size: 10px;padding: 0' (click)='refresh()'>refresh</button>
+            <button type="button" class="btn btn-outline-info" style='width: 50px; font-size: 10px;padding: 0' (click)='predict()'>predict</button>
+            <div *ngFor='let items of disease, index as i' class="diseaseList{{i}}">
+                <app-time-series [id]='i' [disease]='items'></app-time-series>
             </div>
         </div>
     </div>

@@ -1,11 +1,13 @@
 import * as d3 from 'd3';
+import { DataService } from '../core/data.service';
 
 export class Calendar {
     cellSize = 8;
     width = 500;
     weekday;
 
-    constructor(weekday) {
+    constructor(weekday,
+        private dataSer: DataService) {
         this.weekday = weekday;
     }
 
@@ -74,6 +76,10 @@ export class Calendar {
               return timeWeek.count(d3.utcYear(d.date), d.date) * this.cellSize + 0.5;
             })
             .attr('y', d => countDay(d.date) * this.cellSize + 0.5)
+            .on('click', (d) => {
+                // console.log(d);
+                this.dataSer.select_day = d.date;
+            })
             .attr('fill', (d) => color(d.value))
             .append('title')
             .text(d => `${formatDate(d.date)}: ${(d.value)}`);

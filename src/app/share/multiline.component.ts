@@ -12,14 +12,15 @@ export class MultiLine {
   className;
 
   constructor(data, name, range?) {
-    this.data = data;
+    // this.data = data;
     this.className = name;
     if (!!range) {
       this.range = range;
     }
   }
 
-  render() {
+  render(data) {
+    this.data = data;
     console.log(this.data);
     if (!!d3.select(this.className).select('svg')) {
       this.clear();

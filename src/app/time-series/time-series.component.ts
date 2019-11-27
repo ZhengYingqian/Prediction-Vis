@@ -69,17 +69,17 @@ export class TimeSeriesComponent implements OnInit {
   }
   ngOnInit() {
     this.classname = '.viewMultiline' + this.id;
-    // console.log(this.data);
-    // console.log(this.id);
+    // // console.log(this.data);
+    // // console.log(this.id);
     this.keys = [this.disease];
-    this.leftKeys = this.keys.concat(this.cols);
+    // this.leftKeys = this.keys.concat(this.cols);
     this.data = [{'name': this.disease, 'values': this.dataSer.getByName(this.disease)}] ;
-    // console.log(this.keys);
+    // // console.log(this.keys);
     this.ViewMultiline = new MultiLine(this.data, this.classname, [0, 500]);
-    this.ViewMultiline.render();
+    this.ViewMultiline.render(this.data);
     this.ref.detectChanges();
-    this.cols = this.dataSer.predict_group[this.disease];
-    this.dataSource = this.id == 1 ? ELEMENT_DATA : ELEMENT_DATA_1;
+    // this.cols = this.dataSer.predict_group[this.disease];
+    // this.dataSource = this.id == 1 ? ELEMENT_DATA : ELEMENT_DATA_1;
   }
 
   // getEnvLines() {
@@ -142,7 +142,7 @@ export class TimeSeriesComponent implements OnInit {
     // console.log(newData);
     // const newLines = this.getLines(this.dataSer.selected_data, this.keys);
     this.ViewMultiline = new MultiLine(this.data, this.classname, [0, 500]);
-    this.ViewMultiline.render();
+    this.ViewMultiline.render(this.data);
     // this.ViewMultiline.clear();
     // this.draw(newLines, [0, 800]);
     // this.el.nativeElement.querySelector('#embed-view').outerHTML = ' <div id="embed-view" style="text-align: center"></div>';

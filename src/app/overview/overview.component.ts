@@ -3,6 +3,8 @@ import { specOverview } from '../share/spec';
 import vegaEmbed from 'vega-embed';
 import * as d3 from 'd3';
 import { Calendar } from '../share/calendar';
+import { HttpService } from '../core/http.service';
+import { DataService } from '../core/data.service';
 
 @Component({
   selector: 'app-overview',
@@ -11,14 +13,16 @@ import { Calendar } from '../share/calendar';
 })
 export class OverviewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: HttpService,
+    private dataSer: DataService) { }
   ngOnInit() {
     d3.csv('assets/2014-1-4.csv').then(res => {
-      console.log(res);
+      // console.log(res);
       vegaEmbed('.crossfilter', this.transform(res), { actions: false });
     });
-    // vegaEmbed('.calender', this.getSpec(), { actions: false });
     this.drawCalender();
+    // this.getDiseaseCount('E05.900');
+    // this.getRecords('E05.900');
   }
 
   transform(data) {
@@ -28,8 +32,6 @@ export class OverviewComponent implements OnInit {
       u['age'] = parseInt(u['age'], 10);
       return u;
     });
-    // spec.
-    // spec.data.values = [{'<12': 1000, '12-25': 2000]
     return spec;
   }
 
@@ -50,16 +52,29 @@ export class OverviewComponent implements OnInit {
         return temp;
       });
       console.log(ori_data);
-      const cview = new Calendar('monday');
+      const cview = new Calendar('monday', this.dataSer);
       cview.chart(ori_data);
     });
-    }
+  }
 
-    getIncrease(data) {
-      return d3.pairs(data, ({value: previous}, {date, value}) => {
-        console.log(value, previous);
-      return {date: new Date(date), value: (value - previous) / previous};
+  getIncrease(data) {
+    return d3.pairs(data, ({ value: previous }, { date, value }) => {
+      console.log(value, previous);
+      return { date: new Date(date), value: (value - previous) / previous };
     });
-    }
+  }
 
+  getDiseaseCount(dis) {
+    const params = { 'dim': [dis], 'start': '2014-1-1', 'stop': '2015-1-1', 'normalization': false };
+    this.service.getDisease(params).subscribe(res => {
+      console.log(res);
+    });
+  }
+
+  getRecords(dis) {
+    const params = {'dim': [dis], 'start': '2014-1-1', 'stop': '2015-1-1'};
+    this.service.getRecords(params).subscribe(res => {
+      console.log(res);
+    });
+  }
 }

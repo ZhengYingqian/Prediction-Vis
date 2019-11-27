@@ -14,6 +14,7 @@ import { RadarComponent } from './radar/radar.component';
 
 import {HttpService} from './core/http.service';
 import { DataService } from './core/data.service';
+import { DiseaseService } from './core/disease.service';
 import { OverviewComponent } from './overview/overview.component';
 
 
@@ -36,7 +37,7 @@ import { OverviewComponent } from './overview/overview.component';
     MatNativeDateModule,
     ReactiveFormsModule
   ],
-  providers: [HttpService, DataService],
+  providers: [HttpService, DataService, DiseaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
