@@ -1,63 +1,29 @@
+<div class="row" style="margin-top: 20px;">
+
+
+    <div>
+        <div style="width: 450px; float:left">
+            <app-radar [id]='id' [disease]='disease'></app-radar>
+        </div>
+
+        <div [class]="'viewMultiline' + id" style="width: 450px; float: right" class="col-4">
+            <button mat-button (click)="select(start, end)" style="float: left; margin-left: 50px"> 重绘</button>
+            <button mat-button (click)="select(start, end)" style="float: left; margin-left: 20px"> 归一化</button>
+            <button mat-button (click)="select(start, end)" style="float: left; margin-left: 20px"> 平滑</button>
+        </div>
+    </div>
+
+    <!-- <div style="float: left;width: 450" class="col-4"> -->
+</div>
 <div class="row">
-    <div [class]="'viewMultiline' + id" style="width: 450px; float: left;margin-left: -30px" class="col-4">
-        <button mat-button (click)="select(start, end)" style="float: left; margin-left: 50px"> 重绘</button>
-        <button mat-button (click)="select(start, end)" style="float: left; margin-left: 20px"> 归一化</button>
-        <button mat-button (click)="select(start, end)" style="float: left; margin-left: 20px"> 平滑</button>
-    </div>
-    <div style="float: left;width: 450" class="col-4">
-        <app-radar [id]='id' [disease]='disease'></app-radar>
-    </div>
-
-    <div style="width: 25%; float: right;" class="col-4">
-        <!-- <mat-chip-list aria-label="Fish selection"> -->
-        <span *ngFor='let item of cols.slice(0, 10)' class="badge badge-primary" style="margin-right: 2px;" (click)='deleteDim(item)'>{{item}}</span>
-        <button type="button" class="btn btn-outline-info" style='width: 50px; font-size: 10px;padding: 0' (click)='refresh()'>refresh</button>
-        <!-- <span class='badge badge-info' style='' (click)='refresh()'>refresh</span> -->
-        <!-- </mat-chip-list> -->
-        <!-- <mat-card> -->
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-            <!--- Note that these columns can be defined in any order.
-                          The actual rendered columns are set as a property on the row definition" -->
-
-            <!-- Position Column -->
-            <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-            </ng-container>
-
-            <!-- Name Column -->
-            <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> 预测算法 </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="MSE">
-                <th mat-header-cell *matHeaderCellDef> MSE</th>
-                <td mat-cell *matCellDef="let element"> {{element.MSE}} </td>
-            </ng-container>
-            <!-- Weight Column -->
-            <ng-container matColumnDef="RMSE">
-                <th mat-header-cell *matHeaderCellDef> RMSE </th>
-                <td mat-cell *matCellDef="let element"> {{element.RMSE}} </td>
-            </ng-container>
-
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="MAE">
-                <th mat-header-cell *matHeaderCellDef> MAE </th>
-                <td mat-cell *matCellDef="let element"> {{element.MAE}} </td>
-            </ng-container>
-            <!-- Symbol Column -->
-            <ng-container matColumnDef="R2">
-                <th mat-header-cell *matHeaderCellDef> R2 </th>
-                <td mat-cell *matCellDef="let element"> {{element.R2}} </td>
-            </ng-container>
-
-
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <!-- </mat-card> -->
-    </div>
+    <button mat-button (click)="showBTN(0)" style="float: left; margin-left: 50px"> 数据编辑</button>
+    <button mat-button (click)="showBTN(1)" style="float: left; margin-left: 20px"> 特征分析</button>
+    <button mat-button (click)="showBTN(2)" style="float: left; margin-left: 20px;"> 特征提取</button>
+    <button mat-button (click)="showBTN(3) " style="float: left; margin-left: 20px "> 可解释分析</button>
+</div>
+<div class="row ">
+    <app-feature-edit style="margin-top: 20px;width: 100% " *ngIf="!show "></app-feature-edit>
+    <app-features *ngIf="show===1 " style="width: 100% "></app-features>
+    <app-features *ngIf="show===2 " style="width: 100% "></app-features>
+    <app-shap-vis *ngIf="show===3 "></app-shap-vis>
 </div>

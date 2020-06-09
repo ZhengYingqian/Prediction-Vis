@@ -1,0 +1,11 @@
+.mat-header-cell {
+    padding: 24px;
+}
+
+.mat-cell {
+    padding: 24px;
+}
+
+.vega-embed {
+    padding-right: 0;
+}

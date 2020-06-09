@@ -1,0 +1,88 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!show">
+
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="ave_C">
+        <th mat-header-cell *matHeaderCellDef> 日均温(℃)</th>
+        <td mat-cell *matCellDef="let element"> {{element.ave_C}} </td>
+    </ng-container>
+    <ng-container matColumnDef="min_C">
+        <th mat-header-cell *matHeaderCellDef> 日最低温(℃) </th>
+        <td mat-cell *matCellDef="let element"> {{element.min_C}} </td>
+    </ng-container>
+    <ng-container matColumnDef="max_C">
+        <th mat-header-cell *matHeaderCellDef> 日最高温(℃)</th>
+        <td mat-cell *matCellDef="let element"> {{element.max_C}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ave_ws">
+        <th mat-header-cell *matHeaderCellDef> 日风速（m/s） </th>
+        <td mat-cell *matCellDef="let element"> {{element.ave_ws}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ave_rh">
+        <th mat-header-cell *matHeaderCellDef> 日湿度（%） </th>
+        <td mat-cell *matCellDef="let element"> {{element.min_C}} </td>
+    </ng-container>
+    <ng-container matColumnDef="ave_hpa">
+        <th mat-header-cell *matHeaderCellDef> 日气压（Pa）</th>
+        <td mat-cell *matCellDef="let element"> {{element.ave_hpa}} </td>
+    </ng-container>
+    <ng-container matColumnDef="daily_precipitation">
+        <th mat-header-cell *matHeaderCellDef> 日降水量（ml） </th>
+        <td mat-cell *matCellDef="let element"> {{element.daily_precipitation}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="SO2">
+        <th mat-header-cell *matHeaderCellDef> SO2 </th>
+        <td mat-cell *matCellDef="let element"> {{element.SO2}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="NO2">
+        <th mat-header-cell *matHeaderCellDef> NO2 </th>
+        <td mat-cell *matCellDef="let element"> {{element.NO2}} </td>
+    </ng-container>
+    <ng-container matColumnDef="CO">
+        <th mat-header-cell *matHeaderCellDef> CO </th>
+        <td mat-cell *matCellDef="let element"> {{element.CO}} </td>
+    </ng-container>
+    <ng-container matColumnDef="PM2_5">
+        <th mat-header-cell *matHeaderCellDef> PM2_5 </th>
+        <td mat-cell *matCellDef="let element"> {{element.PM2_5}} </td>
+    </ng-container>
+    <ng-container matColumnDef="PM10">
+        <th mat-header-cell *matHeaderCellDef> PM10 </th>
+        <td mat-cell *matCellDef="let element"> {{element.PM10}} </td>
+    </ng-container>
+    <ng-container matColumnDef="O38h">
+        <th mat-header-cell *matHeaderCellDef> 氧含量 </th>
+        <td mat-cell *matCellDef="let element"> {{element.O38h}} </td>
+    </ng-container>
+    <ng-container matColumnDef="AQI">
+        <th mat-header-cell *matHeaderCellDef> AQI </th>
+        <td mat-cell *matCellDef="let element"> {{element.AQI}} </td>
+    </ng-container>
+    <ng-container matColumnDef="month">
+        <th mat-header-cell *matHeaderCellDef> 月份 </th>
+        <td mat-cell *matCellDef="let element"> {{element.month}} </td>
+    </ng-container>
+    <ng-container matColumnDef="day">
+        <th mat-header-cell *matHeaderCellDef> 日期 </th>
+        <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+    </ng-container>
+    <ng-container matColumnDef="week">
+        <th mat-header-cell *matHeaderCellDef> 周 </th>
+        <td mat-cell *matCellDef="let element"> {{element.week}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

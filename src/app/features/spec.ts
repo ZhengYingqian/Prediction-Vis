@@ -1,12 +1,12 @@
 export const specInit = {
-    '$schema': 'https://vega.github.io/schema/vega-lite/v4.json',
-    'width': 100,
-    // 'height': 100,
-    'data': {'url': 'data/seattle-weather.csv'},
-    'mark': 'tick',
-    'encoding': {
-      'x': {'field': 'precipitation', 'type': 'quantitative'}
-    }
+  '$schema': 'https://vega.github.io/schema/vega-lite/v4.json',
+  'width': 100,
+  // 'height': 100,
+  'data': { 'url': 'data/seattle-weather.csv' },
+  'mark': 'tick',
+  'encoding': {
+    'x': { 'field': 'precipitation', 'type': 'quantitative' }
+  }
 };
 
 export const specTest = {
@@ -14,25 +14,26 @@ export const specTest = {
   'description': 'A simple bar chart with embedded data.',
   'data': {
     'values': [
-      {'a': 'A', 'b': 28}, {'a': 'B', 'b': 55}, {'a': 'C', 'b': 43},
-      {'a': 'D', 'b': 91}, {'a': 'E', 'b': 81}, {'a': 'F', 'b': 53},
-      {'a': 'G', 'b': 19}, {'a': 'H', 'b': 87}, {'a': 'I', 'b': 52}
+      { 'a': 'A', 'b': 28 }, { 'a': 'B', 'b': 55 }, { 'a': 'C', 'b': 43 },
+      { 'a': 'D', 'b': 91 }, { 'a': 'E', 'b': 81 }, { 'a': 'F', 'b': 53 },
+      { 'a': 'G', 'b': 19 }, { 'a': 'H', 'b': 87 }, { 'a': 'I', 'b': 52 }
     ]
   },
   'mark': 'bar',
   'encoding': {
-    'x': {'field': 'a', 'type': 'ordinal'},
-    'y': {'field': 'b', 'type': 'quantitative'}
+    'x': { 'field': 'a', 'type': 'ordinal' },
+    'y': { 'field': 'b', 'type': 'quantitative' }
   }
 };
 
 export const specRepeat = {
   '$schema': 'https://vega.github.io/schema/vega-lite/v4.json',
   'description': 'Summarized and per year weather information for Seatle and New York.',
-  'data': {'values': []},
+  'data': { 'values': [] },
   'repeat': {
     'row': ['Horsepower', 'Acceleration', 'Miles_per_Gallon'],
-    'column': ['temp_max', 'precipitation', 'wind']},
+    'column': ['temp_max', 'precipitation', 'wind']
+  },
   'spec': {
     'width': 100,
     'height': 100,
@@ -42,7 +43,7 @@ export const specRepeat = {
         'encoding': {
           'y': {
             'aggregate': 'mean',
-            'field': {'repeat': 'column'},
+            'field': { 'repeat': 'column' },
             'type': 'quantitative'
           },
           'x': {
@@ -59,8 +60,8 @@ export const specRepeat = {
 export const specY = {
   '$schema': 'https://vega.github.io/schema/vega-lite/v4.json',
   'description': 'Summarized and per year weather information for Seatle and New York.',
-  'data': {'values': []},
-  'repeat': {'row': ['temp_max', 'precipitation', 'wind']},
+  'data': { 'values': [] },
+  'repeat': { 'row': ['temp_max', 'precipitation', 'wind'] },
   'spec': {
     'width': 100,
     'height': 100,
@@ -70,7 +71,7 @@ export const specY = {
         'encoding': {
           'y': {
             'aggregate': 'mean',
-            'field': {'repeat': 'row'},
+            'field': { 'repeat': 'row' },
             'type': 'quantitative'
           },
           'x': {
@@ -83,8 +84,8 @@ export const specY = {
             'type': 'temporal',
             'field': 'date'
           },
-          'color': {'type': 'nominal', 'field': 'location'},
-          'opacity': {'value': 0.2}
+          'color': { 'type': 'nominal', 'field': 'location' },
+          'opacity': { 'value': 0.2 }
         }
       },
       {
@@ -92,7 +93,7 @@ export const specY = {
         'encoding': {
           'y': {
             'aggregate': 'mean',
-            'field': {'repeat': 'row'},
+            'field': { 'repeat': 'row' },
             'type': 'quantitative'
           },
           'x': {
@@ -100,11 +101,38 @@ export const specY = {
             'field': 'date',
             'type': 'ordinal'
           },
-          'color': {'type': 'nominal', 'field': 'location'}
+          'color': { 'type': 'nominal', 'field': 'location' }
         }
       }
     ]
   }
-}
+};
 
-
+export const rowsSpec = {
+  '$schema': 'https://vega.github.io/schema/vega-lite/v4.json',
+  'data': { 'values': [] },
+  'repeat': { 'row': ['distance', 'delay', 'time'] },
+  'spec': {
+    'layer': [{
+      'mark': 'bar',
+      "width": 100,
+      "height": 100,
+      'encoding': {
+        'x': {
+          'field': { 'repeat': 'row' },
+          'bin': { 'maxbins': 20 },
+          'type': 'quantitative'
+        },
+        'y': { 'aggregate': 'count', 'type': 'quantitative' },
+        // 'color': { 'value': 'blue' }
+      }
+    }]
+  },
+  "config": {
+    "countTitle": "Count",
+    "axisX": { "titleLimit": 100 },
+    "axisY": {
+      "minExtent": 20
+    }
+  }
+};

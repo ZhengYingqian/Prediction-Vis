@@ -7,7 +7,7 @@
             </div>
         </div>
         <div class="col-8 list">
-            <p>时间序列预测和分析<span style="float: right;margin-right: 100px">feature rank and prediction result</span></p>
+            <p>时间序列预测和分析</p>
             <span *ngFor='let item of disease' class="badge badge-primary" style="margin-right: 2px;" (click)='deleteDim(item)'>{{item}}</span>
             <span *ngFor='let item of envCol' class="badge badge-Secondary" style="margin-right: 2px;" (click)='deleteCol(item)'>{{item}}</span>
             <button type="button" class="btn btn-outline-info" style='width: 50px; font-size: 10px;padding: 0' (click)='refresh()'>refresh</button>

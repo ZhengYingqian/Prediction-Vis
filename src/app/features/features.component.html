@@ -1,11 +1,53 @@
-<div class='container'>
-    <div class="row" style="margin-left: 15px;">
-        <div *ngFor="let data of columns, index as i" class="col-2">
-            <div class="feature{{i}}"></div>
+<div class='row'>
+    <div class="col-6">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!show">
+
+            <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="feature">
+                <th mat-header-cell *matHeaderCellDef> feature </th>
+                <td mat-cell *matCellDef="let element"> {{element.feature}} </td>
+            </ng-container>
+            <ng-container matColumnDef="max">
+                <th mat-header-cell *matHeaderCellDef> max</th>
+                <td mat-cell *matCellDef="let element"> {{element.max}} </td>
+            </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="mean">
+                <th mat-header-cell *matHeaderCellDef> mean</th>
+                <td mat-cell *matCellDef="let element"> {{element.mean}} </td>
+            </ng-container>
+            <ng-container matColumnDef="min">
+                <th mat-header-cell *matHeaderCellDef> min </th>
+                <td mat-cell *matCellDef="let element"> {{element.min}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="std_dev">
+                <th mat-header-cell *matHeaderCellDef> std_dev </th>
+                <td mat-cell *matCellDef="let element"> {{element.std_dev}} </td>
+            </ng-container>
+            <ng-container matColumnDef="var">
+                <th mat-header-cell *matHeaderCellDef> VAR </th>
+                <td mat-cell *matCellDef="let element"> {{element.var}} </td>
+            </ng-container>
+            <!-- <ng-container matColumnDef="ave_hpa">
+                <th mat-header-cell *matHeaderCellDef> feature</th>
+                <td mat-cell *matCellDef="let element"> {{element.ave_hpa}} </td>
+            </ng-container> -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+    <!-- <div class="row" style="margin-left: 15px;" class="col-2">
+        <div *ngFor="let data of columns, index as i">
+            <div class=" feature{{i}} "></div>
         </div>
-    </div>
-    <div class="row">
-        <div class="corr" style="float: left; width:90%"></div>
-        <div class="result" style="float: right; width:10%"></div>
-    </div>
+    </div> -->
+    <div class="corr1" style="float: left; margin-top:50px;margin-left: 180px "></div>
+    <div class="corr2" style="float: left; margin-top:50px;margin-left: -5px "></div>
+    <!-- <div class="result " style="float: right; width:10% "></div> -->
+    <!-- </div> -->
 </div>

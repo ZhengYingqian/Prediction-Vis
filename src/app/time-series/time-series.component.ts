@@ -14,16 +14,16 @@ export interface PeriodicElement {
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Linear regression', MSE: '0.024', MAE: '0.125', R2: '0.006', RMSE: '0.156' },
-  { position: 2, name: 'SVM', MSE: '0.024', MAE: '0.124', R2: '0.015',  RMSE: '0.155' },
+  { position: 2, name: 'SVM', MSE: '0.024', MAE: '0.124', R2: '0.015', RMSE: '0.155' },
   { position: 3, name: 'KNN', MSE: '0.025', MAE: '0.126', R2: '0.159', RMSE: '-0.036' },
-  { position: 4, name: 'Random forest', MSE: '0.024', MAE: '0.123', R2: '0.027', RMSE: '0.155'}
+  { position: 4, name: 'Random forest', MSE: '0.024', MAE: '0.123', R2: '0.027', RMSE: '0.155' }
 ];
 
 const ELEMENT_DATA_2: PeriodicElement[] = [
   { position: 1, name: 'Linear regression', MSE: '0.024', MAE: '0.125', R2: '0.006', RMSE: '0.156' },
-  { position: 2, name: 'SVM', MSE: '0.024', MAE: '0.124', R2: '0.015',  RMSE: '0.155' },
+  { position: 2, name: 'SVM', MSE: '0.024', MAE: '0.124', R2: '0.015', RMSE: '0.155' },
   { position: 3, name: 'KNN', MSE: '0.025', MAE: '0.126', R2: '0.159', RMSE: '-0.036' },
-  { position: 4, name: 'Random forest', MSE: '0.024', MAE: '0.123', R2: '0.027', RMSE: '0.155'}
+  { position: 4, name: 'Random forest', MSE: '0.024', MAE: '0.123', R2: '0.027', RMSE: '0.155' }
 ];
 
 const ELEMENT_DATA_1: PeriodicElement[] = [
@@ -62,6 +62,7 @@ export class TimeSeriesComponent implements OnInit {
   // dims = cols;
 
   displayedColumns: string[] = ['position', 'name', 'MSE', 'MAE', 'R2', 'RMSE'];
+  show = 1;
 
   constructor(
     private dataSer: DataService,
@@ -73,7 +74,7 @@ export class TimeSeriesComponent implements OnInit {
     // // console.log(this.id);
     this.keys = [this.disease];
     // this.leftKeys = this.keys.concat(this.cols);
-    this.data = [{'name': this.disease, 'values': this.dataSer.getByName(this.disease)}] ;
+    this.data = [{ 'name': this.disease, 'values': this.dataSer.getByName(this.disease) }];
     // // console.log(this.keys);
     this.ViewMultiline = new MultiLine(this.data, this.classname, [0, 500]);
     this.ViewMultiline.render(this.data);
@@ -82,6 +83,11 @@ export class TimeSeriesComponent implements OnInit {
     // this.dataSource = this.id == 1 ? ELEMENT_DATA : ELEMENT_DATA_1;
   }
 
+
+  showBTN(value) {
+    this.show = value;
+
+  }
   // getEnvLines() {
   //   d3.csv('assets/res_environment_day.csv').then(res => {
   //     this.draw1(this.getLines(res, this.cols), [0, 1]);

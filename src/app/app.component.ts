@@ -80,6 +80,7 @@ export class AppComponent implements OnInit {
     this.disease.forEach((u, i) => {
       this.service.getPrediction(this.dataSer.getPredicArr(i)).subscribe(res1 => {
         console.log(res1);
+        // this.drawLine()
       });
     });
   }

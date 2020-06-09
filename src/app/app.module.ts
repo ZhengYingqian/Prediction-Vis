@@ -16,6 +16,9 @@ import {HttpService} from './core/http.service';
 import { DataService } from './core/data.service';
 import { DiseaseService } from './core/disease.service';
 import { OverviewComponent } from './overview/overview.component';
+import { FeatureEditComponent } from './feature-edit/feature-edit.component';
+import { ShapVisComponent } from './shap-vis/shap-vis.component';
+import { ShapHexbinComponent } from './shap-hexbin/shap-hexbin.component';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { OverviewComponent } from './overview/overview.component';
     SunburstComponent,
     FeaturesComponent,
     RadarComponent,
-    OverviewComponent
+    OverviewComponent,
+    FeatureEditComponent,
+    ShapVisComponent,
+    ShapHexbinComponent
   ],
   imports: [
     BrowserModule,

@@ -10,7 +10,7 @@ export class HttpService {
   // url = 'http://127.0.0.1:5000';
   url = 'http://202.117.54.60:5000';
   // 数据库后端
-  url1 = 'http://202.117.54.93:8800';
+  url1 = 'http://202.117.54.93:8080';
 
   datas = {
     'clinical': '/cdata', // 门诊数据
@@ -31,11 +31,11 @@ export class HttpService {
   getRes(partArr: any): Observable<any> {
     partArr = ['儿科门诊', '妇科门诊', '耳鼻喉科门诊'];
     const params = JSON.stringify({ 'part': partArr });
-    return this.http.post(this.url + '/data', params, {headers: {'Content-Type': 'application/json'}});
+    return this.http.post(this.url + '/data', params, { headers: { 'Content-Type': 'application/json' } });
   }
 
   getPrediction(params): Observable<any> {
-    return this.http.post(this.url + '/predict', JSON.stringify(params), {headers: {'Content-Type': 'application/json'}});
+    return this.http.post(this.url + '/predict', JSON.stringify(params), { headers: { 'Content-Type': 'application/json' } });
   }
   // 获取特征
 
